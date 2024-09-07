@@ -16,7 +16,9 @@ export const searchRepositories = (query: string) => {
 
       dispatch({ type: ActionType.RepositoriesFetched, payload: result });
     } catch (err) {
-      dispatch({ type: ActionType.RepositoriesError, error: err.message });
+      if(err instanceof Error) {
+        dispatch({ type: ActionType.RepositoriesError, error: err.message });
+      }
     }
   };
 };

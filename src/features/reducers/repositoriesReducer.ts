@@ -18,12 +18,12 @@ interface RepositoriesErrorAction {
   error: string;
 }
 
-type Action =
+export type Action =
   | RepositoriesFetchingAction
   | RepositoriesFetchedAction
   | RepositoriesErrorAction;
 
-enum ActionType {
+export enum ActionType {
   RepositoriesFetching = 'repositoriesFetching',
   RepositoriesFetched = 'repositoriesFetched',
   RepositoriesError = 'repositoriesError'

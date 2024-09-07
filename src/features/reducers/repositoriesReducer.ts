@@ -4,21 +4,49 @@ interface RepositoriesState {
   error: string;
 }
 
+interface RepositoriesFetchingAction {
+  type: 'repositoriesFetching';
+}
+
+interface RepositoriesFetchedAction {
+  type: 'repositoriesFetched';
+  payload: string[];
+}
+
+interface RepositoriesErrorAction {
+  type: 'repositoriesError';
+  error: string;
+}
+
+export type Action =
+  | RepositoriesFetchingAction
+  | RepositoriesFetchedAction
+  | RepositoriesErrorAction;
+
+export enum ActionType {
+  RepositoriesFetching = 'repositoriesFetching',
+  RepositoriesFetched = 'repositoriesFetched',
+  RepositoriesError = 'repositoriesError'
+}
+
 const initialState: RepositoriesState = {
   isLoading: false,
   data: [],
   error: ''
 };
 
-const repositoriesReducer = (state = initialState, action: any) => {
+const repositoriesReducer = (
+  state = initialState,
+  action: Action
+): RepositoriesState => {
   switch (action.type) {
-    case 'repositoriesFetchRepositories':
+    case ActionType.RepositoriesFetching:
       return { ...state, isLoading: true };
 
-    case 'repositoriesFetchedRepositories':
+    case ActionType.RepositoriesFetched:
       return { ...state, isLoading: false, data: action.payload };
 
-    case 'repositoriesError':
+    case ActionType.RepositoriesError:
       return { ...state, isLoading: false, error: action.error };
 
     default:

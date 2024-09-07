@@ -18,6 +18,17 @@ interface RepositoriesErrorAction {
   error: string;
 }
 
+type Action =
+  | RepositoriesFetchingAction
+  | RepositoriesFetchedAction
+  | RepositoriesErrorAction;
+
+enum ActionType {
+  RepositoriesFetching = 'repositoriesFetching',
+  RepositoriesFetched = 'repositoriesFetched',
+  RepositoriesError = 'repositoriesError'
+}
+
 const initialState: RepositoriesState = {
   isLoading: false,
   data: [],
@@ -26,19 +37,16 @@ const initialState: RepositoriesState = {
 
 const repositoriesReducer = (
   state = initialState,
-  action:
-    | RepositoriesFetchingAction
-    | RepositoriesFetchedAction
-    | RepositoriesErrorAction
+  action: Action
 ): RepositoriesState => {
   switch (action.type) {
-    case 'repositoriesFetching':
+    case ActionType.RepositoriesFetching:
       return { ...state, isLoading: true };
 
-    case 'repositoriesFetched':
+    case ActionType.RepositoriesFetched:
       return { ...state, isLoading: false, data: action.payload };
 
-    case 'repositoriesError':
+    case ActionType.RepositoriesError:
       return { ...state, isLoading: false, error: action.error };
 
     default:

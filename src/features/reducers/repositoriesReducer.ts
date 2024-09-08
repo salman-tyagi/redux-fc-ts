@@ -29,14 +29,14 @@ export enum ActionType {
   RepositoriesError = 'repositoriesError'
 }
 
-const initialState: RepositoriesState = {
+const initialState = {
   isLoading: false,
   data: [],
   error: ''
 };
 
 const repositoriesReducer = (
-  state = initialState,
+  state: RepositoriesState = initialState,
   action: Action
 ): RepositoriesState => {
   switch (action.type) {

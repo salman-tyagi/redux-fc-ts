@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { searchRepositories } from '../actions/repositoriesAction';
+import { useAppSelector } from './useAppSelector';
 
 const useActions = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
-  const repositories = useSelector((state: any) => state.repositories.data);
+  const { isLoading, data } = useAppSelector(state => state.repositories);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,7 +22,7 @@ const useActions = () => {
     inputRef.current.focus();
   }, []);
 
-  return { repositories, handleSubmit, query, setQuery, inputRef };
+  return { isLoading, data, handleSubmit, query, setQuery, inputRef };
 };
 
 export default useActions;

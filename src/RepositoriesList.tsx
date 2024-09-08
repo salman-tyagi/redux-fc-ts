@@ -1,7 +1,7 @@
 import useActions from './features/hooks/useActions';
 
 const RepositoriesList: React.FC = (): JSX.Element => {
-  const { repositories, handleSubmit, query, setQuery, inputRef } =
+  const { isLoading, data, handleSubmit, query, setQuery, inputRef } =
     useActions();
 
   return (
@@ -16,11 +16,15 @@ const RepositoriesList: React.FC = (): JSX.Element => {
       />
       <button>Search Package</button>
 
-      <ol>
-        {repositories.map((item: string) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ol>
+      {isLoading ? (
+        <div>Searching...</div>
+      ) : (
+        <ol>
+          {data.map((item: string) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ol>
+      )}
     </form>
   );
 };

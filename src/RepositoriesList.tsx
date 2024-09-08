@@ -1,23 +1,14 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { searchRepositories } from './features/actions/repositoriesAction';
+import useActions from './features/hooks/useActions';
 
 const RepositoriesList: React.FC = (): JSX.Element => {
-  const [query, setQuery] = useState('');
-  const dispatch = useDispatch();
-  const repositories = useSelector((state: any) => state.repositories.data);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    dispatch(searchRepositories(query) as any);
-    setQuery('');
-  };
+  const { repositories, handleSubmit, query, setQuery, inputRef } =
+    useActions();
 
   return (
     <form onSubmit={handleSubmit}>
       <h4>Search for Package</h4>
       <input
+        ref={inputRef}
         value={query}
         type='text'
         placeholder='Enter package name'

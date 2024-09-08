@@ -7,7 +7,9 @@ const useActions = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
-  const { isLoading, data } = useAppSelector(state => state.repositories);
+  const { isLoading, data, error } = useAppSelector(
+    state => state.repositories
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +24,7 @@ const useActions = () => {
     inputRef.current.focus();
   }, []);
 
-  return { isLoading, data, handleSubmit, query, setQuery, inputRef };
+  return { isLoading, data, error, handleSubmit, query, setQuery, inputRef };
 };
 
 export default useActions;

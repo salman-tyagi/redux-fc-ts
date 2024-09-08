@@ -1,7 +1,9 @@
-import { FC } from "react";
+import { FC } from 'react';
+
+import RepositoriesList from './RepositoriesList';
 
 const App: FC = (): JSX.Element => {
-  return <div>Hello world!</div>;
+  return <RepositoriesList />;
 };
 
 export default App;
